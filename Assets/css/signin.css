@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Wallpaper */
+body {
+    background-image: url("../images/signin-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed
+}
+/* Tratando o Entrar */
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 100px;
+}
+/* Fundo da área de Login */
+.card {
+    background-color: #ffffff80;
+    padding: 30px;
+    border-radius: 4%;
+    box-shadow: 3px 3px 1px 0px #00000060
+}
+/* Head do site */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgb(130, 45, 187);
+}
+/* Área de digitar Usuário e Senha */
+.label-float input {
+    width: 100%; /* Largura da barra de escrever */
+    padding: 5px 5px; /* Tamanho da linha de escrever */
+    display: inline-block;
+    border: 0;
+    border-bottom: 2px solid #822dbb;
+    background-color: transparent;
+    outline: none;
+    min-width: 180px;
+    font-size: 16px;
+    transition: all .3s ease-out;
+    border-radius: 0;
+}
+/* Texto de Usuário e Senha */
+.label-float {
+    position: relative;
+    padding-top: 13px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+/* */
+.label-float input:focus{
+    border-bottom: 2px solid rgb(185, 92, 247);
+}
+/* Como Usário e Senha irão se comportar */
+.label-float label {
+    color: rgb(130, 45, 187);
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 13px;
+    transition: all .3s ease-out; /* Faz com que suba */
+}
+/* Especificações do Usuário e Senha ao clicar */
+.label-float input:focus + label,
+.label-float input:valid + label {
+    font-size: 13px;
+    margin-top: 0;
+    color: solid rgb(185, 92, 247);
+}
+/* Configurando o botão */
+button {
+    background-color: transparent;
+    border-color: rgb(130, 45, 187);
+    color: rgb(130, 45, 187);
+    padding: 7px;
+    font-weight: bold;
+    font-size: 12pt;
+    margin-top: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    transition: all .5 ease-out;
+}
+/* Configurando quando clica no botão */
+button:hover {
+    background-color: rgb(130, 45, 187);
+    color: #ffffff;
+}
+/* Centralizando o botão*/
+.justify-center {
+    display: flex;
+    justify-content: center;
+}
+/* Linha que separa Usuário e Senha de Cadastre-se */
+hr {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    width: 60%;
+}
+/* Configurando texto de Criar Cadastro */
+p {
+    color: rgb(130, 45, 187);
+    font-size: 14pt;
+    text-align: center;
+}
+/* Link para ir em Cadaste-se */
+a {
+    color: rgb(88, 25, 129);
+    font-weight: bold;
+    text-decoration: none;
+    transition: all .3s ease-out;
+}
+/* Configurando quando clica em Cadastre-se */
+a:hover {
+    color: rgb(130, 45, 187);
+}
+/* Olhar ou esconder senha */
+.fa-eye {
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    cursor: pointer;
+    color: rgb(130, 45, 187);
+}
+/* Mensagem de erro */
+#msgError{
+    text-align: center;
+    color: #ff0000;
+}
