@@ -55,7 +55,7 @@ function entrar(){
     // Redirecionando o Usuário caso seja correto
     if (usuario.value == uservalid.usuario && senha.value == uservalid.senha){
     // Redirecionando para a página inicial
-        window.location.href = 'http://127.0.0.1:5500/Assets/html/index.html'
+        window.location.href = '../../index.html'
     // Criando o token
         let token = Math.random().toString(16).substring(2) + Math.random().toString(16).substring(2) 
     // Guardando o token de login

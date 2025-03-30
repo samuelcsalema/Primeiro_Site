@@ -189,7 +189,7 @@ function cadastrar() {
         msgError.innerHTML = ''
         
         setTimeout(() => {
-            window.location.href = 'http://127.0.0.1:5500/Assets/html/signin.html'
+            window.location.href = '../html/signin.html'
         }, 3000)
     } else {
         msgError.setAttribute('style', 'display: block')
