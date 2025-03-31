@@ -6,18 +6,22 @@ let validNome = false // Confirma ou nega se os dados estão corretos
 let usuario = document.querySelector('#usuario') // Coleta o dado presente nesse campo
 let labelusuario = document.querySelector('#labelusuario') // Altera a linha
 let validUsuario = false // Confirma ou nega se os dados estão corretos
-let listaUser = JSON.parse(localStorage.getItem('listaUser')) || []; // Criando a lista de usuários 
+let listaUser = JSON.parse(localStorage.getItem('listaUser')) || [] // Criando a lista de usuários 
 //Criando a idade
 let idade  = document.querySelector('#idade') // Coleta o dado presente nesse campo
 let labelidade = document.querySelector('#labelidade') // Altera a linha
-let valididade = false // Confirma ou nega se os dados estão corretos
+let validIdade = false // Confirma ou nega se os dados estão corretos
 // Criando o email
 let email = document.querySelector('#email') // Coleta o dado presente nesse campo
 let labelemail = document.querySelector('#labelemail') // Altera a linha
-let validemail = false // Confirma ou nega se os dados estão corretos
+let validEmail = false // Confirma ou nega se os dados estão corretos
 // Criando gêneros
-let escolhagenero = document.querySelectorAll('input[name="genero"]'); // Detecta todas as opções
-let validgenero = false // Confirma ou nega se os dados estão corretos
+let inputsgenero = document.querySelectorAll('input[name="genero"]') // Traz todos os inputs de nome genero
+let labelgenero = document.querySelector('#labelgenero') // Altera a linha
+let labelhomem = document.querySelector('#labelhomem') // Altera a linha
+let labelmulher = document.querySelector('#labelmulher') // Altera a linha
+let labeloutro = document.querySelector('#labeloutro') // Altera a linha
+let validGenero = false  // Confirma ou nega se os dados estão corretos
 // Criando a senha
 let senha  = document.querySelector('#senha') // Coleta o dado presente nesse campo
 let labelsenha = document.querySelector('#labelsenha') // Altera a linha
@@ -65,6 +69,20 @@ usuario.addEventListener('keyup', () =>{
     validUsuario = true // Dado aceito
     }
 })
+//Definindo o que acontece em idade
+idade.addEventListener('keyup', () =>{
+    if(idade.value < 0 || idade.value > 120 || !/\d/.test(idade.value)){ // Condições para idade válida
+        labelidade.style.color = 'red' // Cor da escrita caso o dado esteja errado
+        labelidade.innerHTML = '<strong> Idade *Insira uma idade válida </strong>' // Mensagem de auxilio de erro
+        idade.setAttribute('style', 'border-color: red') // Cor da linha em caso de erro
+        validIdade = false // Dado negado
+    } else {
+        labelidade.style.color = 'green' // Cor da escrita caso o dado esteja certo
+        labelidade.innerHTML = 'Idade' // Categoria do dado aceito
+        idade.setAttribute('style', 'border-color: green') // Cor da linha em caso de acerto
+        validIdade = true // Dado aceito
+    }
+})
 //Definindo o que acontece em email
 email.addEventListener('keyup', () =>{
     if (email.value == ''){ // Determina o que acontece em caso de email vazio
@@ -75,32 +93,39 @@ email.addEventListener('keyup', () =>{
         labelemail.style.color = 'red' // Cor da escrita caso o dado esteja errado
     labelemail.innerHTML = '<strong> Email *Insira um email válido </strong>' // Mensagem de auxilio de erro
     email.setAttribute('style', 'border-color: red') // Cor da linha em caso de erro
-    validemail = false // Dado negado
+    validEmail = false // Dado negado
     } else {
         labelemail.style.color = 'green' // Cor da escrita caso o dado esteja certo
         labelemail.innerHTML = 'Email' // Categoria do dado aceito
         email.setAttribute('style', 'border-color: green') // Cor da linha em caso de acerto
-        validemail = true // Dado aceito
+        validEmail = true // Dado aceito
     }
 })
-//Definindo o que acontece em idade
-idade.addEventListener('keyup', () =>{
-    if(idade.value < 0 || idade.value > 120 || !/\d/.test(idade.value)){ // Condições para idade válida
-        labelidade.style.color = 'red' // Cor da escrita caso o dado esteja errado
-        labelidade.innerHTML = '<strong> Idade *Insira uma idade válida </strong>' // Mensagem de auxilio de erro
-        idade.setAttribute('style', 'border-color: red') // Cor da linha em caso de erro
-        valididade = false // Dado negado
-    } else {
-        labelidade.style.color = 'green' // Cor da escrita caso o dado esteja certo
-        labelidade.innerHTML = 'Idade' // Categoria do dado aceito
-        idade.setAttribute('style', 'border-color: green') // Cor da linha em caso de acerto
-        valididade = true // Dado aceito
-    }
+// Definindo o que acontece em gênero
+inputsgenero.forEach(input => { // Seleciona todas as opções de gênero
+    input.addEventListener('change', () => { // Muda quando o usuário seleciona um gênero ou muda sua escolha
+        let generoselecionado = document.querySelector('input[name="genero"]:checked') // Seleciona o gênero escolhido
+        if(!generoselecionado) { // Se gênero não for selecionado
+            labelgenero.style.color = 'red' // Cor da escrita caso o dado esteja errado
+            labelgenero.innerHTML = '<strong>Gênero *Selecione uma opção</strong>' // Mensagem de auxilio de erro
+            labelhomem.style.color = 'red' // Cor da escrita caso o dado esteja certo
+            labelmulher.style.color = 'red' // Cor da escrita caso o dado esteja certo
+            labeloutro.style.color = 'red' // Cor da escrita caso o dado esteja certo
+            validGenero = false // Dado negado
+        } else { // Se gênero for selecionado
+            labelgenero.style.color = 'green' 
+            labelgenero.innerHTML = 'Gênero: ' // Categoria do dado aceito
+            labelhomem.style.color = 'green' // Cor da escrita caso o dado esteja certo
+            labelmulher.style.color = 'green' // Cor da escrita caso o dado esteja certo
+            labeloutro.style.color = 'green' // Cor da escrita caso o dado esteja certo
+            validGenero = true // Dado aceito
+        }
+    })
 })
 //Definindo o que acontece em senha
 senha.addEventListener('focus', () => {
-    requisitos_senha.classList.add('visible');
-});
+    requisitos_senha.classList.add('visible')
+})
 senha.addEventListener('input', () =>{
     if(senha.value.length <= 7 || !/[^a-zA-Z0-9]/.test(senha.value) || !/\d/.test(senha.value) || !/[a-z]/.test(senha.value) || !/[A-Z]/.test(senha.value)){ // Condições para senha válida
         labelsenha.style.color = 'red' // Cor da escrita caso o dado esteja errado
@@ -163,90 +188,85 @@ confsenha.addEventListener('keyup', () =>{
         validConfsenha = true // Dado aceito
     }
     if (!validConfsenha) {
-        confirmar.style.color = 'red'
-        confirmar.innerHTML = '<strong> Confirmar Senha: As senhas não conferem </strong>'
+        confirmar.style.color = 'red' // Cor da mensagem
+        confirmar.innerHTML = '<strong> Confirmar Senha: As senhas não conferem </strong>' // Mensagem de apoio
     } else {
-        confirmar.style.color = 'green'
-        confirmar.innerHTML = '<strong> Confirmar Senha: As senhas conferem </strong>'
+        confirmar.style.color = 'green' // Cor da mensagem
+        confirmar.innerHTML = '<strong> Confirmar Senha: As senhas conferem </strong>' // Mensagem de acerto
     }
 })
 //Definindo o que acontece ao clicar no cadastro
 function cadastrar() {
-    if(validNome && validUsuario && validSenha && validConfsenha && valididade && validemail) {
-        let listaUser = JSON.parse(localStorage.getItem('listaUser') || '[]')
-        listaUser.push({
-            nomeCad: nome.value,
-            usuarioCad: usuario.value,
-            senhaCad: senha.value,
-            emailCad: email.value,
-            idadeCad: idade.value,
-            //generoCad: genero.value
-            })
-        localStorage.setItem('listaUser', JSON.stringify(listaUser))
-        msgSucess.setAttribute('style', 'display: block')
-        msgSucess.innerHTML = '<strong> Cadastrando Usuário... </strong>' // Mensagem de auxilio de erro
-        msgError.setAttribute('style', 'display: none')
-        msgError.innerHTML = ''
+    let generoselecionado = document.querySelector('input[name="genero"]:checked') // Seleciona o gênero escolhido
+    if(validNome && validUsuario && validSenha && validConfsenha && validIdade && validEmail && validGenero) { // Verifica se todos os campos estão preenchidos corretamente
+        let listaUser = JSON.parse(localStorage.getItem('listaUser') || '[]') // Verifica se a lista de usuários existe
+        
+        listaUser.push({ // Adiciona os dados do usuário na lista
+            emailCad: email.value, // Adiciona o email
+            generoCad: generoselecionado.value, // Adiciona o gênero
+            idadeCad: idade.value, // Adiciona a idade
+            nomeCad: nome.value, // Adiciona o nome
+            senhaCad: senha.value, // Adiciona a senha
+            usuarioCad: usuario.value // Adiciona o usuário
+        })
+        localStorage.setItem('listaUser', JSON.stringify(listaUser)) // Salva a lista de usuários no localStorage
+        msgSucess.setAttribute('style', 'display: block') // Mostra a mensagem de sucesso
+        msgSucess.innerHTML = '<strong> Cadastrando Usuário... </strong>' // Mensagem de sucesso
+        msgError.setAttribute('style', 'display: none') // Esconde a mensagem de erro
+        msgError.innerHTML = '' // Limpa a mensagem de erro
         
         setTimeout(() => {
             window.location.href = '../html/signin.html'
-        }, 3000)
+        }, 3000) // Espera 3 segundos e redireciona para a página de login
     } else {
-        msgError.setAttribute('style', 'display: block')
-        msgError.innerHTML = '<strong> Preencha todos os campos corretamente </strong>' // Mensagem de auxilio de erro
-        msgSucess.setAttribute('style', 'display: none')
-        msgSucess.innerHTML = ''
+        msgError.setAttribute('style', 'display: block') // Mostra a mensagem de erro
+        msgError.innerHTML = '<strong> Preencha todos os campos corretamente </strong>' // Mensagem de erro
+        msgSucess.setAttribute('style', 'display: none') // Esconde a mensagem de sucesso
+        msgSucess.innerHTML = '' // Limpa a mensagem de sucesso
     }
 }
 // Fazendo enter mudar de campos
-let inputs = document.querySelectorAll('input'); // Seleciona todos os campos
+let inputs = document.querySelectorAll('input') // Seleciona todos os campos
 inputs.forEach((input, index) => { // Começa a avaliar todos os campos
     input.addEventListener('keydown', function(e) {
         if (e.key === 'Enter') {  // Detecta se enter foi apertado
-            e.preventDefault(); // Impede a função original
+            e.preventDefault() // Impede a função original
             if (inputs[index + 1]) {  // Detecta se tem mais um campos
-                inputs[index + 1].focus();  // Passa pro próximo campos
+                inputs[index + 1].focus()  // Passa pro próximo campos
             }
         }
-    });
-});
-// Criando mensagens de erro
-let msgError = document.querySelector('#msgError')
-let msgSucess = document.querySelector('#msgSucess')
-let botao = document.querySelector('#verSenha');
-// Botão de visualizar a senha
-let botaoConfirm = document.querySelector('#verConfirmSenha');
-botao.addEventListener('click', function() {
-    let inputSenha = document.querySelector('#senha');
-    
-    if (inputSenha.getAttribute('type') == 'password') {
-        inputSenha.setAttribute('type', 'text');
-    } else {
-        inputSenha.setAttribute('type', 'password');
+    })
+})
+// Fazendo enter cadastrar
+let confSenhaInput = document.querySelector('#confsenha') // Seleciona o campo de confirmação de senha
+confSenhaInput.addEventListener('keydown', function(e) { // Adiciona o evento de pressionar tecla
+    if (e.key === 'Enter') { // Detecta se enter foi apertado
+        e.preventDefault() // Impede a função original
+        cadastrar() // Clica em 'Cadastrar'
     }
-});
+})
+// Criando mensagens de erro e sucesso
+let msgError = document.querySelector('#msgError') // Mensagem de erro
+let msgSucess = document.querySelector('#msgSucess') // Mensagem de sucesso
+// Botão de visualizar a senha
+let botao = document.querySelector('#verSenha')
+let botaoConfirm = document.querySelector('#verConfirmSenha')
+botao.addEventListener('click', function() {
+    let inputSenha = document.querySelector('#senha') // Seleciona o campo de senha
+    
+    if (inputSenha.getAttribute('type') == 'password') { // Verifica se o tipo do campo é senha
+        inputSenha.setAttribute('type', 'text') // Se for, muda para texto
+    } else {
+        inputSenha.setAttribute('type', 'password') // Se não for, muda para senha
+    }
+})
 // Botão de visualizar a confirmação de senha
 botaoConfirm.addEventListener('click', function() {
-    let inputConfirmSenha = document.querySelector('#confsenha');
+    let inputConfirmSenha = document.querySelector('#confsenha') // Seleciona o campo de confirmação de senha
     
-    if (inputConfirmSenha.getAttribute('type') == 'password') {
-        inputConfirmSenha.setAttribute('type', 'text');
+    if (inputConfirmSenha.getAttribute('type') == 'password') { // Verifica se o tipo do campo é senha
+        inputConfirmSenha.setAttribute('type', 'text') // Se for, muda para texto
     } else {
-        inputConfirmSenha.setAttribute('type', 'password');
+        inputConfirmSenha.setAttribute('type', 'password') // Se não for, muda para senha
     }
-});
-// Definindo o que acontece em gênero
-function validateGender() {
-    let selectedGender = null;
-    genderInputs.forEach(input => {
-    if (input.checked) {
-        selectedGender = input.value;
-        labelgenero.style.color = 'green';
-        labelgenero.innerHTML = 'Gênero';
-    validgenero = true;
-    } else {
-        labelgenero.style.color = 'red';
-        labelgenero.innerHTML = '<strong> Gênero: *Escolha um gênero </strong>';
-        validgenero = false;
-    }
-})}
+})

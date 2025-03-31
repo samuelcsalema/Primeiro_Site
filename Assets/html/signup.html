@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--- Trazendo a imagem do olho --->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--- Trazendo o CSS --->
     <link rel="stylesheet" href="../css/signup.css">
     <title> Sign-Up </title>
 </head>
@@ -37,15 +39,15 @@
                 <label id="labelemail" for="email"> Email </label>
             </div>
             <!--- Gênero --->
-            <!---<div class="genero">
-                <label id="generolabel" aria-required> Gênero: </label>
-                <input type = "radio" id = "homem" name = "genero" value="homem">
+            <div class="genero">
+                <label id="labelgenero" aria-required> Gênero: </label>
+                <input type = "radio" id = "homem" name = "genero" value="Masculino">
                 <label id="labelhomem" for = "homem"> Masculino </label>
-                <input type = "radio" id = "mulher" name = "genero" value="mulher">
+                <input type = "radio" id = "mulher" name = "genero" value="Feminino">
                 <label id="labelmulher" for = "mulher"> Feminino </label>
-                <input type = "radio" id = "outro" name = "genero" value="outro">
+                <input type = "radio" id = "outro" name = "genero" value="Outro">
                 <label id="labeloutro" for = "outro"> Outro </label>
-            </div>--->
+            </div>
             <!--- Senha --->
             <div class="label-float">
                 <input type="password" id="senha" placeholder=" " required>
@@ -58,6 +60,7 @@
                 <label id="labelconfsenha" for="confsenha"> Confirmar Senha </label>
                 <i id="verConfirmSenha" class="fa fa-eye" aria-hidden="true"></i>
             </div>
+            <!--- Requisitos para a senha --->
             <div id="requisitos_senha">
                 <ul>
                     <li id="caracteres"> A senha deve conter ao menos 8 caracteres </li>
@@ -74,6 +77,7 @@
             </div>
         </div>
         </div>
+        <!--- Ligando ao JavaScript --->
         <script src="../js/signup.js"> </script>
 </body>
 </html>
